@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.weather.szilvi.currentweather.models.WeatherResponse;
+
+import java.util.concurrent.ExecutionException;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText currentCity;
@@ -17,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         currentCity = findViewById(R.id.enterCityEditText);
     }
 
-    public void getWeather(View view) {
+    public void getWeather(View view) throws ExecutionException, InterruptedException {
         String enteredCity = currentCity.getText().toString();
         DownloadTask task = new DownloadTask();
-        task.execute("http://api.openweathermap.org/data/2.5/weather?q=" + enteredCity);
+        WeatherResponse weatherResponse = task.execute("http://api.openweathermap.org/data/2.5/weather?q=" + enteredCity + "&APPID=" + System.getenv("APIKEY")).get();
     }
 }
