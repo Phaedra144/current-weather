@@ -10,4 +10,4 @@
 /build
 /captures
 .externalNativeBuild
-*/strings.xml
+app/src/main/res/values/strings.xml
